@@ -6,6 +6,9 @@ RUN apt-get install -y build-essential git jq
 
 RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
 
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
+RUN apt-get install -y nodejs
+
 USER buildagent
 
 RUN git clone -b v1.0.2 --depth 1 https://github.com/tfutils/tfenv.git /home/buildagent/.tfenv
@@ -25,4 +28,3 @@ USER buildagent
 RUN echo 'export PATH="$HOME/.tfenv/bin:$PATH"' >> /home/buildagent/.bashrc
 RUN echo 'export PATH="$HOME/.tgenv/bin:$PATH"' >> /home/buildagent/.bashrc
 
-RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
